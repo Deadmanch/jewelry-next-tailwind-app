@@ -30,4 +30,17 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .border-b-header-nav {
+    position: relative;
+  }
+
+  .border-b-header-nav::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -23px;
+    height: 2px;
+    background-color: var(--foreground);
+  }
 }

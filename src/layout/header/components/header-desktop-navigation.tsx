@@ -20,7 +20,7 @@ export const HeaderDesktopNavigation = ({
   ...props
 }: HeaderDesktopNavigationProps) => {
   const linkClass = (href: string) =>
-    `text-base font-normal transition-colors duration-300 ease-in-out hover:text-brown-primary ${currenPage === href ? 'border-b-header-nav' : ''}`
+    `text-base font-normal transition-colors duration-300 ease-in-out hover:text-primary ${currenPage === href ? 'border-b-header-nav' : ''}`
 
   return (
     <div className={cn('hidden lg:flex', className)} {...props}>
