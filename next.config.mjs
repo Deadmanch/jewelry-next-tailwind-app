@@ -1,4 +1,30 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    domains: ['cdn-bucket.hb.ru-msk.vkcs.cloud']
+  },
+  webpack(config) {
+    const fileLoaderRule = config.module.rules.find((rule) =>
+      rule.test?.test?.('.svg')
+    )
 
-export default nextConfig;
+    config.module.rules.push(
+      {
+        ...fileLoaderRule,
+        test: /\.svg$/i,
+        resourceQuery: /url/ // *.svg?url
+      },
+      {
+        test: /\.svg$/i,
+        issuer: fileLoaderRule.issuer,
+        resourceQuery: { not: [/url/] },
+        use: ['@svgr/webpack']
+      }
+    )
+    fileLoaderRule.exclude = /\.svg$/i
+
+    return config
+  }
+}
+
+export default nextConfig
