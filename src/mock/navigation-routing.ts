@@ -7,6 +7,7 @@ export enum NavigationRouting {
   CONDITIONS = '/conditions',
   FAVORITES = '/favorites',
   CATALOG = '/catalog',
+  PRODUCT = '/catalog/product',
   PROFILE = '/profile'
 }
 
