@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
 
 export interface IRequestParams<B = unknown> {
   url: string
   method?: HttpMethod
   headers?: Record<string, string>
-  query?: Record<string, string>
+  query?: Record<string, any>
   body?: B
   token?: string
 }
@@ -19,8 +20,20 @@ export const request = async <T, B = unknown>({
 }: IRequestParams<B>): Promise<T> => {
   try {
     if (query) {
-      const queryString = new URLSearchParams(query).toString()
-      url = `${url}?${queryString}`
+      const queryParams = new URLSearchParams()
+
+      for (const [key, value] of Object.entries(query)) {
+        if (Array.isArray(value)) {
+          value.forEach((val) => queryParams.append(key, val))
+        } else if (value !== undefined && value !== null) {
+          queryParams.append(key, String(value))
+        }
+      }
+
+      const queryString = queryParams.toString()
+      if (queryString) {
+        url = `${url}?${queryString}`
+      }
     }
     const fetchHeaders = {
       ...headers,

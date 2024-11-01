@@ -1,0 +1,2 @@
+export const DEFAULT_LIMIT_PRODUCTS = 6
+export const DEFAULT_PAGE_PRODUCTS = 1
