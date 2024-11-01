@@ -16,7 +16,7 @@ export default function HomeLayout({
   return (
     <Container className='flex min-h-screen flex-col'>
       <Header />
-      <main className='flex-auto'>{children}</main>
+      <main>{children}</main>
       <Footer />
     </Container>
   )
