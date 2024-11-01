@@ -36,6 +36,9 @@ const config: Config = {
         lg: '768px',
         xl: '960px',
         '2xl': '1248px'
+      },
+      gridTemplateColumns: {
+        300: 'repeat(3, minmax(300px, 1fr))'
       }
     }
   },

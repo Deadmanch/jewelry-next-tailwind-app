@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['cdn-bucket.hb.ru-msk.vkcs.cloud']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn-bucket.hb.ru-msk.vkcs.cloud'
+      }
+    ]
   },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
