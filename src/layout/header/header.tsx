@@ -23,7 +23,10 @@ export const Header = ({ className, ...props }: HeaderProps) => {
 
   return (
     <header
-      className={cn('border-b border-gray-200 p-4 lg:pt-12', className)}
+      className={cn(
+        'border-b border-gray-200 p-4 lg:pt-12 2xl:px-0',
+        className
+      )}
       {...props}
     >
       <div className='flex items-center justify-between gap-4'>
