@@ -43,4 +43,20 @@ body {
     height: 2px;
     background-color: var(--foreground);
   }
+
+  .HeroBlockSwiper {
+    border-radius: var(--border-radius-lg);
+  }
+  .HeroBlockSwiper .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: var(--background);
+    opacity: 1;
+  }
+  .HeroBlockSwiper .swiper-pagination-bullet-active {
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    border: 2px solid var(--background);
+  }
 }

@@ -37,22 +37,13 @@ export const HeaderDesktopNavigation = ({
         <Separator className='h-[17px]' orientation='vertical' />
         <div className='flex items-center gap-5 xl:gap-10'>
           <HeaderSearch isDesktop />
-          <Link
-            href={NavigationRouting.CHECKOUT}
-            className={linkClass(NavigationRouting.CHECKOUT)}
-          >
+          <Link href={NavigationRouting.CHECKOUT}>
             <HeaderCart />
           </Link>
-          <Link
-            href={NavigationRouting.FAVORITES}
-            className={linkClass(NavigationRouting.FAVORITES)}
-          >
+          <Link href={NavigationRouting.FAVORITES}>
             <HeaderFavorites />
           </Link>
-          <Link
-            href={NavigationRouting.PROFILE}
-            className={linkClass(NavigationRouting.PROFILE)}
-          >
+          <Link href={NavigationRouting.PROFILE}>
             <UserIcon />
           </Link>
           <Link href={NavigationRouting.HOME}>
