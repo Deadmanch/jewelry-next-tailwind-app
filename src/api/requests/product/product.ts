@@ -2,12 +2,12 @@ import { IProductsResponse } from '@/interfaces/products.interface'
 import { request } from '@/api/instance'
 import { API } from '@/api/api'
 
-import { IGerProductsDto } from './dto'
+import { IGetProductsRequest } from './dto'
 
-export const getProducts = async (dto: IGerProductsDto): Promise<IProductsResponse> => {
+export const getProducts = async (productRequest: IGetProductsRequest): Promise<IProductsResponse> => {
   return request<IProductsResponse>({
     url: API.product.get,
-    query: dto
+    query: productRequest
   })
 }
 
