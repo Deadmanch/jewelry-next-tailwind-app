@@ -1,4 +1,4 @@
-export interface IGerProductsDto {
+export interface IGetProductsRequest {
   limit: number
   offset: number
   categoryId?: number

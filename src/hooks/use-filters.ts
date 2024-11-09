@@ -1,17 +1,11 @@
 'use client'
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
 interface IPriceRangeProps {
   priceMin?: number
   priceMax?: number
-}
-
-interface IQueryParams extends IPriceRangeProps {
-  categoryId?: number
-  discounted?: boolean
-  name?: string
 }
 
 export interface IFilters {
@@ -29,33 +23,33 @@ export interface IReturnProps extends IFilters {
 }
 
 export const useFilters = (): IReturnProps => {
-  const searchParams = useSearchParams() as unknown as Map<keyof IQueryParams, string>
+  const searchParams = useSearchParams()
 
   const [priceRange, setPriceRange] = useState<IPriceRangeProps>({
     priceMin: Number(searchParams.get('priceMin')) || undefined,
     priceMax: Number(searchParams.get('priceMax')) || undefined
   })
-  const updatePrice = (name: keyof IPriceRangeProps, value: number) => {
+  const updatePrice = useCallback((name: keyof IPriceRangeProps, value: number) => {
     setPriceRange((prev) => ({ ...prev, [name]: value }))
-  }
+  }, [])
 
   const [categoryId, setCategoryId] = useState<number | undefined>(
     Number(searchParams.get('categoryId')) || undefined
   )
-  const updateCategoryId = (value: number) => {
+  const updateCategoryId = useCallback((value: number) => {
     setCategoryId(value)
-  }
+  }, [])
 
   const [discounted, setDiscounted] = useState<boolean | undefined>(
     Boolean(searchParams.get('discounted')) || undefined
   )
-  const updateDiscounted = (value: boolean) => {
+  const updateDiscounted = useCallback((value: boolean) => {
     setDiscounted(value)
-  }
+  }, [])
   const [name, setName] = useState<string | undefined>(searchParams.get('name') || undefined)
-  const updateName = (name: string) => {
+  const updateName = useCallback((name: string) => {
     setName(name)
-  }
+  }, [])
   return useMemo(
     () => ({
       categoryId,
@@ -67,6 +61,15 @@ export const useFilters = (): IReturnProps => {
       setCategoryId: updateCategoryId,
       setDiscounted: updateDiscounted
     }),
-    [categoryId, discounted, priceRange, name]
+    [
+      categoryId,
+      discounted,
+      priceRange,
+      name,
+      updateName,
+      updatePrice,
+      updateCategoryId,
+      updateDiscounted
+    ]
   )
 }

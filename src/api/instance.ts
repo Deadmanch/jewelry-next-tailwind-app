@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
 
@@ -20,21 +21,16 @@ export const request = async <T, B = unknown>({
 }: IRequestParams<B>): Promise<T> => {
   try {
     if (query) {
-      const queryParams = new URLSearchParams()
+      const filteredQuery = Object.fromEntries(
+        Object.entries(query).filter(([_, value]) => value !== undefined && value !== null)
+      )
 
-      for (const [key, value] of Object.entries(query)) {
-        if (Array.isArray(value)) {
-          value.forEach((val) => queryParams.append(key, val))
-        } else if (value !== undefined && value !== null) {
-          queryParams.append(key, String(value))
-        }
-      }
-
-      const queryString = queryParams.toString()
-      if (queryString) {
-        url = `${url}?${queryString}`
+      const queryParams = new URLSearchParams(filteredQuery).toString()
+      if (queryParams) {
+        url = `${url}?${queryParams}`
       }
     }
+
     const fetchHeaders = {
       ...headers,
       ...(token ? { Authorization: `Bearer ${token}` } : {})
